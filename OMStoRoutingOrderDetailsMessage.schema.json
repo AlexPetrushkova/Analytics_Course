@@ -1,0 +1,201 @@
+{
+	"definitions": {},
+	"$schema": "http://json-schema.org/draft-07/schema#", 
+	"$id": "https://example.com/object1726646055.json", 
+	"title": "OMS передает данные о новом заказе в маршрутизацию", 
+	"type": "object",
+	"required": [
+		"orderId",
+		"orderStatus",
+		"products",
+		"deliveryDate",
+		"customer",
+		"deliveryAddress"
+	],
+	"properties": {
+		"orderId": {
+			"$id": "#root/orderId", 
+			"title": "ИД заказа", 
+			"type": "integer",
+			"examples": [
+				74596217852
+			],
+			"default": 0
+		},
+		"orderStatus": {
+			"$id": "#root/orderStatus", 
+			"title": "Статус заказа", 
+			"type": "string",
+			"default": "",
+			"examples": [
+				"paid"
+			],
+			"pattern": "^.*$"
+		},
+		"products": {
+			"$id": "#root/products", 
+			"title": "Список товаров", 
+			"type": "array",
+            "minItems": 1,
+			"default": [],
+			"items":{
+				"$id": "#root/products/items", 
+				"title": "Items", 
+				"type": "object",
+				"required": [
+					"productId",
+					"quantity"
+				],
+				"properties": {
+					"productId": {
+						"$id": "#root/products/items/productId", 
+						"title": "ИД товара", 
+						"type": "integer",
+						"examples": [
+							123456
+						],
+						"default": 0
+					},
+					"quantity": {
+						"$id": "#root/products/items/quantity", 
+						"title": "Количество", 
+						"type": "integer",
+						"examples": [
+							2
+						],
+						"default": 1
+					}
+				}
+			}
+
+		},
+		"deliveryDate": {
+			"$id": "#root/deliveryDate", 
+			"title": "Дата доставки", 
+			"type": "string",
+			"default": "",
+			"examples": [
+				"16-10-2024"
+			],
+			"pattern": "\\d{2}-\\d{2}-\\d{4}"
+		},
+		"customer": {
+			"$id": "#root/customer", 
+			"title": "Заказчик", 
+			"type": "object",
+			"required": [
+				"name",
+				"surname",
+				"phoneNumber",
+				"individualFlag",
+				"legalEntityFlag",
+				"legalEntityDetails"
+			],
+			"properties": {
+				"name": {
+					"$id": "#root/customer/name", 
+					"title": "Имя", 
+					"type": "string",
+					"default": "",
+					"examples": [
+						"Sergey"
+					],
+					"pattern": "[\\sА-Яа-яёЁ_]*"
+				},
+				"surname": {
+					"$id": "#root/customer/surname", 
+					"title": "Фамилия", 
+					"type": "string",
+					"default": "",
+					"examples": [
+						"Pluschenko"
+					],
+					"pattern": "[\\sА-Яа-яёЁ_]*"
+				},
+				"phoneNumber": {
+					"$id": "#root/customer/phoneNumber", 
+					"title": "Номер телефона", 
+					"type": "string",
+					"default": "",
+					"examples": [
+						"+79271234567"
+					],
+					"pattern": "\\+7[0-9]{10}"
+				},
+				"individualFlag": {
+					"$id": "#root/customer/individualFlag", 
+					"title": "Метка физ.лица", 
+					"type": "boolean",
+					"examples": [
+						false
+					],
+					"default": true
+				},
+				"legalEntityFlag": {
+					"$id": "#root/customer/legalEntityFlag", 
+					"title": "Метка юр.лица", 
+					"type": "boolean",
+					"examples": [
+						true
+					],
+					"default": true
+				},
+				"legalEntityDetails": {
+					"$id": "#root/customer/legalEntityDetails", 
+					"title": "Сведения о юр.лице", 
+					"type": "object",
+					"required": [
+						"name",
+						"OGRN",
+						"INN"
+					],
+					"properties": {
+						"name": {
+							"$id": "#root/customer/legalEntityDetails/name", 
+							"title": "Наименование", 
+							"type": "string",
+                            "minLength": 5,
+                            "maxLength": 55,
+							"default": "",
+							"examples": [
+								"OOO Roga I Kopyta"
+							],
+							"pattern": "[\\sА-Яа-яёЁ_]*"
+						},
+						"OGRN": {
+							"$id": "#root/customer/legalEntityDetails/OGRN", 
+							"title": "ОГРН", 
+							"type": "integer",
+							"examples": [
+								1047712345678
+							],
+							"default": 0
+						},
+						"INN": {
+							"$id": "#root/customer/legalEntityDetails/INN", 
+							"title": "ИНН", 
+							"type": "integer",
+							"examples": [
+								9632587415
+							],
+							"default": 0
+						}
+					}
+				}
+
+			}
+		}
+,
+		"deliveryAddress": {
+			"$id": "#root/deliveryAddress", 
+			"title": "Deliveryaddress", 
+			"type": "string",
+            "maxLength": 128,
+			"default": "",
+			"examples": [
+				"Red Square, Mausoleum, Moscow"
+			],
+			"pattern": "[\\s0-9A-Za-zА-Яа-яёЁ_]*"
+		}
+	}
+}
